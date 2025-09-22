@@ -477,12 +477,11 @@ if(STDEXEC_ENABLE_ASIO)
 
     if(${STDEXEC_ASIO_USES_BOOST})
       set(BOOST_INCLUDE_LIBRARIES asio system)
-      set(BOOST_ENABLE_COMPATIBILITY_TARGETS TRUE)
       set(BOOST_VERSION 1.86.0)
-      CPMAddPackage(
-        NAME Boost
-        URL https://github.com/boostorg/boost/releases/download/boost-${BOOST_VERSION}/boost-${BOOST_VERSION}-cmake.tar.xz
-        OPTIONS "BOOST_SKIP_INSTALL_RULES OFF"
+      rapids_cpm_find(Boost ${BOOST_VERSION}
+        CPM_ARGS
+          URL https://github.com/boostorg/boost/releases/download/boost-${BOOST_VERSION}/boost-${BOOST_VERSION}-cmake.tar.xz
+          OPTIONS "BOOST_SKIP_INSTALL_RULES OFF"
       )
 
       add_library(stdexec_boost_pool INTERFACE)
