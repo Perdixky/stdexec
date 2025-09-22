@@ -475,7 +475,7 @@ if(STDEXEC_ENABLE_ASIO)
     file(GLOB_RECURSE boost_pool_sources CONFIGURE_DEPENDS include/execpools/asio/*.hpp)
     file(GLOB_RECURSE asioexec_sources CONFIGURE_DEPENDS include/asioexec/*.hpp)
 
-
+    set(BOOST_INCLUDE_LIBRARIES asio system)
     if(${STDEXEC_ASIO_USES_BOOST})
       set(BOOST_ENABLE_COMPATIBILITY_TARGETS TRUE)
       rapids_cpm_find(Boost 1.86.0
