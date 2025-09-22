@@ -479,6 +479,7 @@ if(STDEXEC_ENABLE_ASIO)
     if(${STDEXEC_ASIO_USES_BOOST})
       set(BOOST_ENABLE_COMPATIBILITY_TARGETS TRUE)
       rapids_cpm_find(Boost 1.86.0
+        GLOBAL_TARGETS Boost::boost
         BUILD_EXPORT_SET stdexec-exports
         INSTALL_EXPORT_SET stdexec-exports
         CPM_ARGS
