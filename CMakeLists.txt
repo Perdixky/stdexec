@@ -475,16 +475,14 @@ if(STDEXEC_ENABLE_ASIO)
     file(GLOB_RECURSE boost_pool_sources CONFIGURE_DEPENDS include/execpools/asio/*.hpp)
     file(GLOB_RECURSE asioexec_sources CONFIGURE_DEPENDS include/asioexec/*.hpp)
 
-    set(BOOST_INCLUDE_LIBRARIES asio system)
     if(${STDEXEC_ASIO_USES_BOOST})
+      set(BOOST_INCLUDE_LIBRARIES asio system)
       set(BOOST_ENABLE_COMPATIBILITY_TARGETS TRUE)
-      rapids_cpm_find(Boost 1.86.0
-        COMPONENTS asio system
-        BUILD_EXPORT_SET stdexec-exports
-        INSTALL_EXPORT_SET stdexec-exports
-        CPM_ARGS
-          GITHUB_REPOSITORY boostorg/boost
-          GIT_TAG boost-1.86.0
+      set(BOOST_VERSION 1.86.0)
+      CPMAddPackage(
+        NAME Boost
+        URL https://github.com/boostorg/boost/releases/download/boost-${BOOST_VERSION}/boost-${BOOST_VERSION}-cmake.tar.xz
+        OPTIONS "BOOST_SKIP_INSTALL_RULES OFF"
       )
 
       add_library(stdexec_boost_pool INTERFACE)
