@@ -487,6 +487,9 @@ if(STDEXEC_ENABLE_ASIO)
           GIT_TAG boost-1.86.0
       )
 
+      install(TARGETS boost_comptarget_boost EXPORT stdexec-exports)
+      list(APPEND stdexec_export_targets boost_comptarget_boost)
+
       add_library(stdexec_boost_pool INTERFACE)
       list(APPEND stdexec_export_targets stdexec_boost_pool)
       add_library(STDEXEC::asio_pool ALIAS stdexec_boost_pool)
