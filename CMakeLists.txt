@@ -479,7 +479,7 @@ if(STDEXEC_ENABLE_ASIO)
     if(${STDEXEC_ASIO_USES_BOOST})
       set(BOOST_ENABLE_COMPATIBILITY_TARGETS TRUE)
       rapids_cpm_find(Boost 1.86.0
-        GLOBAL_TARGETS Boost::boost
+        COMPONENTS asio system
         BUILD_EXPORT_SET stdexec-exports
         INSTALL_EXPORT_SET stdexec-exports
         CPM_ARGS
@@ -504,9 +504,8 @@ if(STDEXEC_ENABLE_ASIO)
       )
 
       target_link_libraries(stdexec_boost_pool INTERFACE
-      STDEXEC::stdexec
-        "$<BUILD_INTERFACE:Boost::boost>"
-        "$<INSTALL_INTERFACE:Boost::boost>"
+          STDEXEC::stdexec
+          Boost::asio
       )
       install(TARGETS stdexec_boost_pool EXPORT stdexec-exports FILE_SET headers)
 
@@ -525,8 +524,7 @@ if(STDEXEC_ENABLE_ASIO)
 
       target_link_libraries(asioexec_boost INTERFACE
           STDEXEC::stdexec
-          "$<BUILD_INTERFACE:Boost::boost>"
-          "$<INSTALL_INTERFACE:Boost::boost>"
+          Boost::asio
       )
       install(TARGETS asioexec_boost EXPORT stdexec-exports FILE_SET headers)
 
@@ -551,8 +549,7 @@ if(STDEXEC_ENABLE_ASIO)
 
       target_link_libraries(stdexec_asio_pool INTERFACE
           STDEXEC::stdexec
-          "$<BUILD_INTERFACE:asio>"
-          "$<INSTALL_INTERFACE:asio>"
+          asio
       )
       install(TARGETS stdexec_asio_pool EXPORT stdexec-exports FILE_SET headers)
 
@@ -571,8 +568,7 @@ if(STDEXEC_ENABLE_ASIO)
 
       target_link_libraries(asioexec_asio INTERFACE
           STDEXEC::stdexec
-          "$<BUILD_INTERFACE:asio>"
-          "$<INSTALL_INTERFACE:asio>"
+          asio
       )
       install(TARGETS asioexec_asio EXPORT stdexec-exports FILE_SET headers)
 
