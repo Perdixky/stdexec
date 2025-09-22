@@ -479,9 +479,11 @@ if(STDEXEC_ENABLE_ASIO)
     if(${STDEXEC_ASIO_USES_BOOST})
       set(BOOST_ENABLE_COMPATIBILITY_TARGETS TRUE)
       rapids_cpm_find(Boost 1.86.0
-      CPM_ARGS
-        GITHUB_REPOSITORY boostorg/boost
-        GIT_TAG boost-1.86.0
+        BUILD_EXPORT_SET stdexec-exports
+        INSTALL_EXPORT_SET stdexec-exports
+        CPM_ARGS
+          GITHUB_REPOSITORY boostorg/boost
+          GIT_TAG boost-1.86.0
       )
 
       add_library(stdexec_boost_pool INTERFACE)
@@ -498,10 +500,10 @@ if(STDEXEC_ENABLE_ASIO)
       )
 
       target_link_libraries(stdexec_boost_pool INTERFACE
-	  	  STDEXEC::stdexec 
-    	  "$<BUILD_INTERFACE:Boost::boost>"
-  		  "$<INSTALL_INTERFACE:Boost::boost>"
-	   )
+      STDEXEC::stdexec
+        "$<BUILD_INTERFACE:Boost::boost>"
+        "$<INSTALL_INTERFACE:Boost::boost>"
+      )
       install(TARGETS stdexec_boost_pool EXPORT stdexec-exports FILE_SET headers)
 
       add_library(asioexec_boost INTERFACE)
@@ -518,10 +520,10 @@ if(STDEXEC_ENABLE_ASIO)
       )
 
       target_link_libraries(asioexec_boost INTERFACE
-	  	  STDEXEC::stdexec
+          STDEXEC::stdexec
           "$<BUILD_INTERFACE:Boost::boost>"
           "$<INSTALL_INTERFACE:Boost::boost>"
-	  )
+      )
       install(TARGETS asioexec_boost EXPORT stdexec-exports FILE_SET headers)
 
     elseif(${STDEXEC_ASIO_USES_STANDALONE})
@@ -544,10 +546,10 @@ if(STDEXEC_ENABLE_ASIO)
       )
 
       target_link_libraries(stdexec_asio_pool INTERFACE
-	      STDEXEC::stdexec
-      	  "$<BUILD_INTERFACE:asio>"
-  		  "$<INSTALL_INTERFACE:asio>"
-	  )
+          STDEXEC::stdexec
+          "$<BUILD_INTERFACE:asio>"
+          "$<INSTALL_INTERFACE:asio>"
+      )
       install(TARGETS stdexec_asio_pool EXPORT stdexec-exports FILE_SET headers)
 
       add_library(asioexec_asio INTERFACE)
@@ -564,10 +566,10 @@ if(STDEXEC_ENABLE_ASIO)
       )
 
       target_link_libraries(asioexec_asio INTERFACE
-	      STDEXEC::stdexec
-		  "$<BUILD_INTERFACE:asio>"
+          STDEXEC::stdexec
+          "$<BUILD_INTERFACE:asio>"
           "$<INSTALL_INTERFACE:asio>"
-	  )
+      )
       install(TARGETS asioexec_asio EXPORT stdexec-exports FILE_SET headers)
 
     else()
