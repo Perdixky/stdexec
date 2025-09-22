@@ -497,7 +497,11 @@ if(STDEXEC_ENABLE_ASIO)
           FILES ${STDEXEC_ASIO_POOL_CONFIG_HPP}
       )
 
-      target_link_libraries(stdexec_boost_pool INTERFACE STDEXEC::stdexec Boost::boost)
+      target_link_libraries(stdexec_boost_pool INTERFACE
+	  	  STDEXEC::stdexec 
+    	  "$<BUILD_INTERFACE:Boost::boost>"
+  		  "$<INSTALL_INTERFACE:Boost::boost>"
+	   )
       install(TARGETS stdexec_boost_pool EXPORT stdexec-exports FILE_SET headers)
 
       add_library(asioexec_boost INTERFACE)
@@ -513,7 +517,11 @@ if(STDEXEC_ENABLE_ASIO)
           FILES ${ASIOEXEC_CONFIG_HPP}
       )
 
-      target_link_libraries(asioexec_boost INTERFACE STDEXEC::stdexec Boost::boost)
+      target_link_libraries(asioexec_boost INTERFACE
+	  	  STDEXEC::stdexec
+          "$<BUILD_INTERFACE:Boost::boost>"
+          "$<INSTALL_INTERFACE:Boost::boost>"
+	  )
       install(TARGETS asioexec_boost EXPORT stdexec-exports FILE_SET headers)
 
     elseif(${STDEXEC_ASIO_USES_STANDALONE})
@@ -535,7 +543,11 @@ if(STDEXEC_ENABLE_ASIO)
           FILES ${STDEXEC_ASIO_POOL_CONFIG_HPP}
       )
 
-      target_link_libraries(stdexec_asio_pool INTERFACE STDEXEC::stdexec asio)
+      target_link_libraries(stdexec_asio_pool INTERFACE
+	      STDEXEC::stdexec
+      	  "$<BUILD_INTERFACE:asio>"
+  		  "$<INSTALL_INTERFACE:asio>"
+	  )
       install(TARGETS stdexec_asio_pool EXPORT stdexec-exports FILE_SET headers)
 
       add_library(asioexec_asio INTERFACE)
@@ -551,7 +563,11 @@ if(STDEXEC_ENABLE_ASIO)
           FILES ${ASIOEXEC_CONFIG_HPP}
       )
 
-      target_link_libraries(asioexec_asio INTERFACE STDEXEC::stdexec asio)
+      target_link_libraries(asioexec_asio INTERFACE
+	      STDEXEC::stdexec
+		  "$<BUILD_INTERFACE:asio>"
+          "$<INSTALL_INTERFACE:asio>"
+	  )
       install(TARGETS asioexec_asio EXPORT stdexec-exports FILE_SET headers)
 
     else()
